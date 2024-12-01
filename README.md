@@ -79,7 +79,7 @@ python color_transfer.py
 
 Select a method based on your needs for color transformation.
 
-### Demo Website
+## Demo Website
 
 Launch an interactive web interface to experiment with color transfer:
 
