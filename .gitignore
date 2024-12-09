@@ -5,6 +5,10 @@
 ### User-specific files ###
 .vscode/*
 .gradio
+cache/
+output/
+*.pth
+evaluation
 
 ### Linux ###
 *~
