@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 import subprocess
-from PIL import Image
 from tqdm import tqdm
 from mpl_toolkits.axes_grid1 import ImageGrid
 import matplotlib.patches as patches
@@ -72,7 +71,10 @@ def color_transfer_before_styleshot(style_folder, content_folder, output_root, s
         lambda style_path, content_path: style_path,
         ct.match_histograms, ct.pca_transfer, ct.lab_transfer, ct.luv_transfer, ct.mean_std_transfer, ct.pdf_transfer]
     # ct_names = ['original', 'mh', 'pca', 'lab', 'luv', 'mean_std', 'pdf']
-    ct_names = ['original', 'pca', 'lab', 'luv']
+    ct_methods = [
+        lambda style_path, content_path: style_path,
+        ct.lab_transfer, ct.luv_transfer, ct.pca_transfer]
+    ct_names = ['original', 'lab', 'luv', 'pca']
     
     for i, style_group in enumerate(style_groups):
         for j, content_group in enumerate(content_groups):
@@ -215,11 +217,9 @@ if __name__ == "__main__":
     
     style_folder = "data/Style"
     content_folder = "data/Content"
-    # output_root = "output/after_styleshot"
-    output_root = "output/before_styleshot"
+    output_root = "output/styleshot"
     
     os.makedirs(output_root, exist_ok=True)
-    
-    # color_transfer_after_styleshot(style_folder, content_folder, output_root, seed=seed, reverse=False)
+
     color_transfer_before_styleshot(style_folder, content_folder, output_root, seed=seed, reverse=False)
-                        
+    
